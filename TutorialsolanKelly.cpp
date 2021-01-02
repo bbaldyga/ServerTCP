@@ -70,26 +70,51 @@ int main()
     //While reciveing display message echo message
 
     char buf[4096];
+    std::string userInput;
     while(true)
     {
-        //Clear the buffer
-        memset(buf,0,4096);
-        //Wait for the message
-        int bytesRecv = recv(clientSocket,buf,4096,0);
-        if(bytesRecv == -1)
-        {
-            std::cerr<<" Nastapil blad z polaczeniem"<<std::endl;
-        }
-        if(bytesRecv == 0)
-        {
-            std::cout<<"Klient sie rozlaczyl "<<std::endl;
-        }
-        //Display message
-        std::cout<<"Otrzymano: "<<std::string(buf,0,bytesRecv)<<std::endl;
+        // //Clear the buffer
+        // memset(buf,0,4096);
+        // //Wait for the message
+        // int bytesRecv = recv(clientSocket,buf,4096,0);
+        // if(bytesRecv == -1)
+        // {
+        //     std::cerr<<" Nastapil blad z polaczeniem"<<std::endl;
+        // }
+        // if(bytesRecv == 0)
+        // {
+        //     std::cout<<"Klient sie rozlaczyl "<<std::endl;
+        // }
+        // //Display message
+        // std::cout<<"Otrzymano: "<<std::string(buf,0,bytesRecv)<<std::endl;
 
-        //Resend message
-        send(clientSocket,buf,bytesRecv+1,0);
-        
+        // //Resend message
+        // send(clientSocket,buf,bytesRecv+1,0);
+
+        //Rozwiazanie gdzie server moze rozmawiac z klientem
+        //Wait for response
+        // memset(buf,0,4096);
+        // int bytesRecevied = recv(clientSocket,buf,4096,0);
+        //  if(bytesRecevied == 0)
+        //  {
+        //      std::cout<<"Klient sie rozlaczyl "<<std::endl;
+        //  }
+        //  if(bytesRecevied == -1)
+        //  {
+        //      std::cerr<<" Nastapil blad z polaczeniem"<<std::endl;
+        //      continue;
+        //  }
+        // std::cout<<" Client> "<<std::string(buf,bytesRecevied)<<"\r\n";
+        // std::cout<<">";
+        // std::getline(std::cin,userInput);
+        // Send to server
+        // int sendRes = send(clientSocket,userInput.c_str(),userInput.size()+1,0);
+        // TODO check if that failed
+        // if(sendRes == -1)
+        // {
+        //     std::cerr<<"Nie mozna wyslac do serwera";
+        //     continue;
+        // }
         
     }
     //Close socket
