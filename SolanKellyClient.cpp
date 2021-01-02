@@ -20,12 +20,12 @@ int main()
     //Create a hint stucture for the server we're connecting with
 
     int port = 54000;
-    std::string ipAddress = "127.0.0.1";
+    std::string ipAddress = "88.156.138.238";
     sockaddr_in hint;
     hint.sin_family = AF_INET;
     hint.sin_port = htons(port);
-    inet_pton(AF_INET,ipAddress.c_str(),&hint.sin_addr);
-
+    //inet_pton(AF_INET,ipAddress.c_str(),&hint.sin_addr);
+    hint.sin_addr.s_addr = inet_addr("88.156.138.238");
     //Connect to the server on the socket
 
     int connectRes = connect(sock,(sockaddr *)&hint,sizeof(hint));
@@ -39,7 +39,13 @@ int main()
    char buf[4096];
    std::string userInput; 
     do{
-        std::cout<<">";
+        
+        //Wait for response
+        memset(buf,0,4096);
+        int bytesRecevied;
+        bytesRecevied = recv(sock,buf,4096,0);
+        std::cout<<" Server> "<<std::string(buf,bytesRecevied)<<"\r\n";
+        std::cout<<"Wpisz wiadomosc: ";
         std::getline(std::cin,userInput);
         //Send to server
         int sendRes = send(sock,userInput.c_str(),userInput.size()+1,0);
@@ -49,10 +55,6 @@ int main()
             std::cerr<<"Nie mozna wyslac do serwera";
             continue;
         }
-        //Wait for response
-        memset(buf,0,4096);
-        int bytesRecevied = recv(sock,buf,4096,0);
-        std::cout<<" Server> "<<std::string(buf,bytesRecevied)<<"\r\n";
     }while(true);
     close(sock);
     return 0;
