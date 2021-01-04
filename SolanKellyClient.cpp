@@ -20,12 +20,12 @@ int main()
     //Create a hint stucture for the server we're connecting with
 
     int port = 54000;
-    std::string ipAddress = "88.156.138.238";
+    std::string ipAddress = "127.0.0.1";
     sockaddr_in hint;
     hint.sin_family = AF_INET;
     hint.sin_port = htons(port);
     //inet_pton(AF_INET,ipAddress.c_str(),&hint.sin_addr);
-    hint.sin_addr.s_addr = inet_addr("88.156.138.238");
+    hint.sin_addr.s_addr = inet_addr("127.0.0.1");
     //Connect to the server on the socket
 
     int connectRes = connect(sock,(sockaddr *)&hint,sizeof(hint));
